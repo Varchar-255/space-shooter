@@ -27,13 +27,18 @@ func _process(delta):
 	#tiro
 	if Input.is_action_pressed("tiro"):
 		if ultimo_disparo <= 0:
-			var tiro = pre_tiro.instance()
-			tiro.set_global_pos(get_global_pos())
-			get_node("../").add_child(tiro)
+			disparo(get_node("posCanhaoD"))
+			disparo(get_node("posCanhaoE"))
 			ultimo_disparo = intervalo
 		pass
 		
 	if ultimo_disparo > 0:
 		ultimo_disparo -= delta
-	
 	pass
+	
+func disparo(node):
+	var tiro = pre_tiro.instance()
+	tiro.set_global_pos(node.get_global_pos())
+	get_owner().add_child(tiro)
+	pass
+	
