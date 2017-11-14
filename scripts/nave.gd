@@ -1,6 +1,9 @@
 extends Node2D
 
 var vel = 200
+var pre_tiro = preload("res://scenes/tiro.tscn")
+var intervalo = .3
+var ultimo_disparo = 0
 
 func _ready():
 	set_process(true)
@@ -20,4 +23,17 @@ func _process(delta):
 		e = 0
 	
 	set_pos(get_pos() + Vector2(vel, 0) * delta * (d + e))
+	
+	#tiro
+	if Input.is_action_pressed("tiro"):
+		if ultimo_disparo <= 0:
+			var tiro = pre_tiro.instance()
+			tiro.set_global_pos(get_global_pos())
+			get_node("../").add_child(tiro)
+			ultimo_disparo = intervalo
+		pass
+		
+	if ultimo_disparo > 0:
+		ultimo_disparo -= delta
+	
 	pass
