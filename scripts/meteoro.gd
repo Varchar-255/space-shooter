@@ -18,8 +18,10 @@ func _process(delta):
 	
 
 func aplica_dano(valor):
+	get_node("anim").play("hit")
 	vida -= valor
 	if vida <= 0:
-		queue_free()
+		remove_from_group(game.GRUPO_INIMIGO)
+		get_node("anim").play("destroy")
 	pass
 
