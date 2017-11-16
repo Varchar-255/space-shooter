@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 var vel = 500
 
@@ -12,4 +12,14 @@ func _process(delta):
 	if get_pos().y < - 30:
 		queue_free()	
 	
+	pass
+
+func _on_tiro_area_enter( area ):
+	if area.is_in_group(game.GRUPO_INIMIGO):
+		if area.has_method("aplica_dano"):
+			area.aplica_dano(1)
+		else:
+			area.queue_free()
+		queue_free()
+		pass
 	pass
