@@ -1,6 +1,6 @@
 extends Node2D
 
-var vel = 200
+var vel = 300
 var pre_tiro = preload("res://scenes/tiro.tscn")
 var intervalo = .1
 var ultimo_disparo = 0
