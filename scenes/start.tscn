@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://scripts/start.gd" type="Script" id=1]
 [ext_resource path="res://sprites/dangerous.png" type="Texture" id=2]
 [ext_resource path="res://sprites/background_2.jpg" type="Texture" id=3]
+[ext_resource path="res://sprites/copyright.png" type="Texture" id=4]
 
 [sub_resource type="GDScript" id=1]
 
@@ -73,7 +74,6 @@ scroll/ignore_camera_zoom = true
 
 [node name="background" type="ParallaxLayer" parent="ParallaxBackground"]
 
-editor/display_folded = true
 motion/scale = Vector2( 1, 1 )
 motion/offset = Vector2( 0, 0 )
 motion/mirroring = Vector2( 0, 480 )
@@ -110,14 +110,14 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = SubResource( 2 )
-margin/left = 198.0
+margin/left = 199.0
 margin/top = 287.0
-margin/right = 450.0
+margin/right = 451.0
 margin/bottom = 341.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "CREDITS"
+text = "HIGHSCORES"
 flat = false
 
 [node name="start2" type="Button" parent="."]
@@ -137,6 +137,11 @@ enabled_focus_mode = 2
 shortcut = null
 text = "EXIT"
 flat = false
+
+[node name="copyright" type="Sprite" parent="."]
+
+transform/pos = Vector2( 85.5259, 462.307 )
+texture = ExtResource( 4 )
 
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]
 
