@@ -2,7 +2,7 @@ extends Node2D
 
 var vel = 200
 var pre_tiro = preload("res://scenes/tiro.tscn")
-var intervalo = .3
+var intervalo = .1
 var ultimo_disparo = 0
 
 func _ready():
@@ -12,9 +12,12 @@ func _ready():
 func _process(delta):
 	var d = 0
 	var e = 0
+	get_node("fogoDireito").set_param(Particles2D.PARAM_DIRECTION, 0)
 	if Input.is_action_pressed("direita"):
 		d = 1 
+		get_node("fogoDireito").set_param(Particles2D.PARAM_DIRECTION, 310)
 	if Input.is_action_pressed("esquerda"):
+		get_node("fogoDireito").set_param(Particles2D.PARAM_DIRECTION, -310)
 		e = -1
 	
 	if get_pos().x > 640 - 50:
