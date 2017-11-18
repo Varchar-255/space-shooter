@@ -1,12 +1,11 @@
 extends Node2D
 
 var vel = 300
-var pre_tiro = preload("res://scenes/tiro.tscn")
-var intervalo = .1
-var ultimo_disparo = 0
+var tiro
 
 func _ready():
 	set_process(true)
+	tiro = TiroDuplo.new(self)
 	pass
 
 func _process(delta):
@@ -27,21 +26,39 @@ func _process(delta):
 	
 	set_pos(get_pos() + Vector2(vel, 0) * delta * (d + e))
 	
-	#tiro
 	if Input.is_action_pressed("tiro"):
+		tiro.disparo()
+		pass
+		
+	tiro.atualiza(delta)
+	pass
+
+class TiroDuplo:
+	
+	var pre_tiro = preload("res://scenes/tiro.tscn")
+	var intervalo = .1
+	var ultimo_disparo = 0
+	var root
+	
+	func _init(root):
+		self.root = root
+		pass
+		
+	func disparo():
 		if ultimo_disparo <= 0:
-			disparo(get_node("posCanhaoD"))
-			disparo(get_node("posCanhaoE"))
+			cria_tiro(root.get_node("posCanhaoD"))
+			cria_tiro(root.get_node("posCanhaoE"))
 			ultimo_disparo = intervalo
 		pass
 		
-	if ultimo_disparo > 0:
-		ultimo_disparo -= delta
-	pass
-	
-func disparo(node):
-	var tiro = pre_tiro.instance()
-	tiro.set_global_pos(node.get_global_pos())
-	get_owner().add_child(tiro)
-	pass
-	
+	func atualiza(delta):
+		if ultimo_disparo > 0:
+			ultimo_disparo -= delta
+		pass
+		
+	func cria_tiro(node):
+		var tiro = pre_tiro.instance()
+		tiro.set_global_pos(node.get_global_pos())
+		root.get_owner().add_child(tiro)
+		pass
+
