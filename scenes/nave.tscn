@@ -85,7 +85,7 @@ transform/pos = Vector2( 22, -29 )
 [node name="fogoDireito" type="Particles2D" parent="."]
 
 visibility/blend_mode = 4
-transform/pos = Vector2( -0.222916, 38.8164 )
+transform/pos = Vector2( 0.0288696, 38.2946 )
 config/amount = 50
 config/lifetime = 0.5
 config/process_mode = 1
