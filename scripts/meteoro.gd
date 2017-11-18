@@ -24,5 +24,6 @@ func aplica_dano(valor):
 		set_process(false)
 		remove_from_group(game.GRUPO_INIMIGO)
 		get_node("anim").play("destroy")
+		get_tree().get_root().get_node("main").get_node("camera").shake()
 	pass
 
