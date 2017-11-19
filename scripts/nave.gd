@@ -1,11 +1,13 @@
-extends Node2D
+extends Area2D
 
 var vel = 300
 var tiro
+var tiro_simples = preload("res://scripts/classes/armas/tiro_simples.gd")
 
 func _ready():
+	add_to_group(game.GRUPO_NAVE)
 	set_process(true)
-	tiro = TiroDuplo.new(self)
+	tiro = tiro_simples.new(self, 1)
 	pass
 
 func _process(delta):
@@ -32,33 +34,6 @@ func _process(delta):
 		
 	tiro.atualiza(delta)
 	pass
-
-class TiroDuplo:
 	
-	var pre_tiro = preload("res://scenes/tiro.tscn")
-	var intervalo = .1
-	var ultimo_disparo = 0
-	var root
-	
-	func _init(root):
-		self.root = root
-		pass
-		
-	func disparo():
-		if ultimo_disparo <= 0:
-			cria_tiro(root.get_node("posCanhaoD"))
-			cria_tiro(root.get_node("posCanhaoE"))
-			ultimo_disparo = intervalo
-		pass
-		
-	func atualiza(delta):
-		if ultimo_disparo > 0:
-			ultimo_disparo -= delta
-		pass
-		
-	func cria_tiro(node):
-		var tiro = pre_tiro.instance()
-		tiro.set_global_pos(node.get_global_pos())
-		root.get_owner().add_child(tiro)
-		pass
-
+func set_tiro_obj(type):
+	tiro = tiro_simples.new(self, type)

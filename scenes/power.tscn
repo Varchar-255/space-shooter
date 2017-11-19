@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://scripts/power.gd" type="Script" id=1]
+[ext_resource path="res://sprites/Power-ups/bolt_gold.png" type="Texture" id=2]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -7.31351, 6.27068, -6.25375, -8.56601, 9.37776, -9.89071, 4.07895, 0.441984, -1.74976, 9.18503 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 8.84789, 3.62127, -0.16011, 18.458, -4.39916, 19.2528, -1.74976, 9.18503, 4.07895, 0.441984 )
+
+[node name="power" type="Area2D"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+
+[node name="bolt_gold" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0.474998, 3.76948 )
+texture = ExtResource( 2 )
+
+[node name="poly" type="CollisionPolygon2D" parent="."]
+
+build_mode = 0
+polygon = Vector2Array( -6.25375, -8.56601, -7.31351, 6.27068, -1.74976, 9.18503, -4.39916, 19.2528, -0.16011, 18.458, 8.84789, 3.62127, 4.07895, 0.441984, 9.37776, -9.89071 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[connection signal="area_enter" from="." to="." method="_on_power_area_enter"]
+
+
