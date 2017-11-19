@@ -11,22 +11,36 @@ func _ready():
 	pass
 
 func _process(delta):
+	
 	var d = 0
 	var e = 0
+	
+	var up = 0
+	
 	get_node("fogoDireito").set_param(Particles2D.PARAM_DIRECTION, 0)
+	
 	if Input.is_action_pressed("direita"):
 		d = 1 
 		get_node("fogoDireito").set_param(Particles2D.PARAM_DIRECTION, 310)
+	
 	if Input.is_action_pressed("esquerda"):
 		get_node("fogoDireito").set_param(Particles2D.PARAM_DIRECTION, -310)
 		e = -1
+	
+	if Input.is_action_pressed("subir"):
+		up = -1
+	
+	if Input.is_action_pressed("descer"):
+		up = 1
 	
 	if get_pos().x > 640 - 50:
 		d = 0
 	if get_pos().x < 50:
 		e = 0
 	
-	set_pos(get_pos() + Vector2(vel, 0) * delta * (d + e))
+	set_pos(get_pos() + Vector2(vel, 0) * delta * (d + e))# + Vector2(0, up))
+	set_pos(get_pos() + Vector2(0, vel) * delta * up)
+	
 	
 	if Input.is_action_pressed("tiro"):
 		tiro.disparo()

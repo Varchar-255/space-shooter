@@ -1,4 +1,4 @@
-var pre_tiro = preload("res://scenes/tiro.tscn")
+var pre_tiro = preload("res://scenes/tiro_vermelho.tscn")
 var intervalo = .1
 var ultimo_disparo = 0
 var root
