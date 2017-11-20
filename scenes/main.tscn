@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/nave.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/power_up_spawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://sprites/background_2.jpg" type="Texture" id=5]
 [ext_resource path="res://fonts/font.fnt" type="BitmapFont" id=6]
+[ext_resource path="res://sprites/UI/playerLife1_blue.png" type="Texture" id=7]
 
 [sub_resource type="GDScript" id=1]
 
@@ -45,6 +46,26 @@ func _ready():
 # call callback
 func _on_score_changed():
 	set_text(str(game.score))"
+
+[sub_resource type="GDScript" id=5]
+
+resource/name = "life_script"
+script/source = "extends Node2D
+
+export(Texture) var texture 
+
+func _ready():
+	game.connect(\"life_changed\", self, \"_on_life_changed\")
+	pass
+	
+func _on_life_changed():
+	update() # forca o draw
+	pass
+	
+func _draw():
+	for n in range(0, game.life):
+		draw_texture(texture, Vector2(n * texture.get_width(), 0)) 
+		pass"
 
 [sub_resource type="Animation" id=2]
 
@@ -109,7 +130,6 @@ script/script = SubResource( 1 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -123,7 +143,6 @@ scroll/ignore_camera_zoom = false
 
 [node name="estrelas" type="ParallaxLayer" parent="ParallaxBackground"]
 
-editor/display_folded = true
 motion/scale = Vector2( 1, 1 )
 motion/offset = Vector2( 0, 0 )
 motion/mirroring = Vector2( 0, 480 )
@@ -140,10 +159,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 14.0
-margin/top = 16.0
-margin/right = 76.0
-margin/bottom = 36.0
+margin/left = 24.0
+margin/top = 406.0
+margin/right = 100.0
+margin/bottom = 444.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -175,6 +194,11 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 script/script = SubResource( 4 )
+
+[node name="lifes" type="Node2D" parent="HUD"]
+
+script/script = SubResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="anim" type="AnimationPlayer" parent="."]
 

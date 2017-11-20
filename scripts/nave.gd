@@ -53,6 +53,9 @@ func set_tiro_obj(type):
 
 func _on_nave_area_enter( area ):
 	if area.is_in_group(game.GRUPO_INIMIGO):
-		get_node("anim").play("nave_explode")
-		game.getCamera().shake()
-		game.set_process(false)
+		if area.has_method("aplica_dano"):
+			area.aplica_dano(200)
+			game.life -= 1
+#		get_node("anim").play("nave_explode")
+#		game.getCamera().shake()
+#		game.set_process(false)
