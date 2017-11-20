@@ -14,7 +14,6 @@ func _process(delta):
 	
 	var d = 0
 	var e = 0
-	
 	var up = 0
 	
 	get_node("fogoDireito").set_param(Particles2D.PARAM_DIRECTION, 0)
@@ -41,7 +40,6 @@ func _process(delta):
 	set_pos(get_pos() + Vector2(vel, 0) * delta * (d + e))# + Vector2(0, up))
 	set_pos(get_pos() + Vector2(0, vel) * delta * up)
 	
-	
 	if Input.is_action_pressed("tiro"):
 		tiro.disparo()
 		pass
@@ -51,3 +49,10 @@ func _process(delta):
 	
 func set_tiro_obj(type):
 	tiro = tiro_simples.new(self, type)
+
+
+func _on_nave_area_enter( area ):
+	if area.is_in_group(game.GRUPO_INIMIGO):
+		get_node("anim").play("nave_explode")
+		game.getCamera().shake()
+		game.set_process(false)

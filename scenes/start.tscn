@@ -25,6 +25,7 @@ func _process(delta):
 
 [node name="start" type="CanvasLayer"]
 
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -61,6 +62,7 @@ script/script = SubResource( 1 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
+editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -74,6 +76,7 @@ scroll/ignore_camera_zoom = true
 
 [node name="background" type="ParallaxLayer" parent="ParallaxBackground"]
 
+editor/display_folded = true
 motion/scale = Vector2( 1, 1 )
 motion/offset = Vector2( 0, 0 )
 motion/mirroring = Vector2( 0, 480 )

@@ -13,7 +13,7 @@ points = Vector2Array( -16.2214, -21.1724, 12.1883, -21.1724, 23.4583, -1.91953,
 custom_solver_bias = 0.0
 points = Vector2Array( -10.5864, 22.0291, -23.7347, 5.12421, 4.90979, 16.3941 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 
 resource/name = "destroy"
 length = 0.7
@@ -145,7 +145,7 @@ trigger = false
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/destroy = SubResource( 7 )
+anims/destroy = SubResource( 3 )
 anims/hit = SubResource( 4 )
 anims/idle = SubResource( 5 )
 playback/active = true
