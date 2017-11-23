@@ -1,14 +1,15 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
-[ext_resource path="res://fonts/font.fnt" type="BitmapFont" id=2]
-[ext_resource path="res://scenes/nave.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/meteor_spawner.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/power_up_spawner.tscn" type="PackedScene" id=5]
-[ext_resource path="res://sprites/background_2.jpg" type="Texture" id=6]
-[ext_resource path="res://sprites/UI/playerLife1_blue.png" type="Texture" id=7]
+[ext_resource path="res://scenes/path_inimigo.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fonts/font.fnt" type="BitmapFont" id=3]
+[ext_resource path="res://scenes/nave.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/meteor_spawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/power_up_spawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sprites/background_2.jpg" type="Texture" id=7]
+[ext_resource path="res://sprites/UI/playerLife1_blue.png" type="Texture" id=8]
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=1]
 
 resource/name = "pause_script"
 script/source = "extends CanvasLayer
@@ -27,9 +28,8 @@ func _input(event):
 		else:
 			get_node(\"paused\").hide()"
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=2]
 
-resource/name = "parallax_camera"
 script/source = "extends Camera2D
 
 var vel = 80
@@ -52,7 +52,7 @@ func shake():
 	shake = .3
 	pass"
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=3]
 
 resource/name = "score_script"
 script/source = "extends Label
@@ -66,7 +66,7 @@ func _ready():
 func _on_score_changed():
 	set_text(str(game.score))"
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=4]
 
 resource/name = "life_script"
 script/source = "extends Node2D
@@ -86,14 +86,13 @@ func _draw():
 		draw_texture(texture, Vector2(n * texture.get_width(), 0)) 
 		pass"
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=5]
 
-resource/name = "nave_colisao"
 length = 1.0
 loop = false
 step = 0.1
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=6]
 
 length = 1.0
 loop = false
@@ -117,6 +116,8 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 script/script = ExtResource( 1 )
 
+[node name="path_inimigo" parent="." instance=ExtResource( 2 )]
+
 [node name="pause" type="CanvasLayer" parent="."]
 
 process/pause_mode = 2
@@ -124,7 +125,7 @@ layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
-script/script = SubResource( 6 )
+script/script = SubResource( 1 )
 
 [node name="preto_branco" type="TextureFrame" parent="pause"]
 
@@ -150,21 +151,21 @@ margin/left = 215.0
 margin/top = 223.0
 margin/right = 437.0
 margin/bottom = 263.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "PAUSED"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="nave" parent="." instance=ExtResource( 3 )]
+[node name="nave" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 318.502, 380 )
 
-[node name="meteor_spawner" parent="." instance=ExtResource( 4 )]
+[node name="meteor_spawner" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 0, -1.49657 )
 
-[node name="power_up_spawner" parent="." instance=ExtResource( 5 )]
+[node name="power_up_spawner" parent="." instance=ExtResource( 6 )]
 
 [node name="camera" type="Camera2D" parent="."]
 
@@ -184,7 +185,7 @@ drag_margin/left = 0.2
 drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
-script/script = SubResource( 1 )
+script/script = SubResource( 2 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -209,7 +210,7 @@ motion/mirroring = Vector2( 0, 480 )
 
 transform/pos = Vector2( 325.104, 236.292 )
 transform/scale = Vector2( 0.346269, 0.453923 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -229,19 +230,19 @@ margin/left = 408.0
 margin/top = 7.0
 margin/right = 635.0
 margin/bottom = 47.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "0000"
 align = 2
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = SubResource( 4 )
+script/script = SubResource( 3 )
 
 [node name="lifes" type="Node2D" parent="HUD"]
 
-script/script = SubResource( 5 )
-texture = ExtResource( 7 )
+script/script = SubResource( 4 )
+texture = ExtResource( 8 )
 
 [node name="back_button" type="Button" parent="HUD"]
 
@@ -264,8 +265,8 @@ flat = false
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/nave_colisao = SubResource( 2 )
-anims/start_pos = SubResource( 3 )
+anims/nave_colisao = SubResource( 5 )
+anims/start_pos = SubResource( 6 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
