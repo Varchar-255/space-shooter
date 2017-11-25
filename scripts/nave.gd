@@ -56,6 +56,7 @@ func _on_nave_area_enter( area ):
 		if area.has_method("aplica_dano"):
 			area.aplica_dano(200)
 			game.life -= 1
-#		get_node("anim").play("nave_explode")
-#		game.getCamera().shake()
-#		game.set_process(false)
+	elif area.is_in_group(game.GRUPO_TIRO_INIMIGO):
+		if area.has_method("destroy"):
+			area.destroy()
+			game.life -= 1

@@ -3,6 +3,7 @@ extends Node
 const GRUPO_INIMIGO = "inimigo"
 const GRUPO_NAVE = "nave"
 const GRUPO_POWER = "power"
+const GRUPO_TIRO_INIMIGO = "gti"
 
 var score = 0 setget setScore
 var life = 3 setget setLife
