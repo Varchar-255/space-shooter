@@ -10,4 +10,4 @@ func _ready():
 func _process(delta):
 	follow.set_offset(follow.get_offset() + vel * delta)
 	if follow.get_unit_offset() >= 1:
-		print("acabou")
+		pass
